@@ -16,16 +16,24 @@
             <li><a href="html/4.html">Kapitola 4</a></li>
             <li><a href="html/5.html">Kapitola 5</a></li>
         </ul>
-        vyhledávání: <input type="text" id="searchInput" onkeyup="searchFunction()" placeholder="Hledat..."> <type="button" onclick="searchFunction()">Hledat</button>
+        vyhledávání: <input type="text" id="searchInput" placeholder="Hledat..."> <button type="button" id="searchButton">Hledat</button>
     </navbar>
 
-    <h1>Výtejte na hlavní stránce Encyklopedie internet of Things. Zde naleznete odkazy na jednotlivé kapitoly, které se věnují různým aspektům IoT, včetně historie, technologií, aplikací a bezpečnosti. Pro více informací klikněte na odkazy níže.</h1>
-    <ul>
-        <li><a href="html/1.html">Kapitola 1: Úvod do IoT</a></li>
-        <li><a href="html/2.html">Kapitola 2: Historie IoT</a></li>
-        <li><a href="html/3.html">Kapitola 3: Technologie IoT</a></li>
-        <li><a href="html/4.html">Kapitola 4: Aplikace IoT</a></li>
-        <li><a href="html/5.html">Kapitola 5: Bezpečnost v IoT</a></li>
-    </ul>
+    <div id="searchResults"></div>
+    <main>
+        <article id="welcome" class="welcome">
+            <h1>Výtejte na hlavní stránce Encyklopedie Internet of Things. Zde naleznete odkazy na jednotlivé kapitoly, které se věnují různým aspektům IoT, včetně historie, technologií, aplikací a bezpečnosti. Pro více informací klikněte na odkazy níže.</h1>
+        </article>
+        <article>
+            <h2>Obsah</h2>
+            <ul>
+                <li><a href="html/1.html">Kapitola 1: Úvod do IoT</a></li>
+                <li><a href="html/2.html">Kapitola 2: Historie IoT</a></li>
+                <li><a href="html/3.html">Kapitola 3: Technologie IoT</a></li>
+                <li><a href="html/4.html">Kapitola 4: Aplikace IoT</a></li>
+                <li><a href="html/5.html">Kapitola 5: Bezpečnost v IoT</a></li>
+            </ul>
+        </article>
+    </main>
 </body>
 </html>
