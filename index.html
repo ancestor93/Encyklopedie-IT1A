@@ -9,23 +9,27 @@
 <body>
     <navbar>
         <ul>
-            <li><a href="index.html">Hlavní stránka</a></li>
-            <li><a href="html/1_uvod_iot.html">Kapitola 1</a></li>
-            <li><a href="html/2_historie_iot.html">Kapitola 2</a></li>
-            <li><a href="html/3_techologie_iot.html">Kapitola 3</a></li>
-            <li><a href="html/4_aplikace_iot.html">Kapitola 4</a></li>
-            <li><a href="html/5_bezepecnost_iot.html">Kapitola 5</a></li>
+            <li class="active"><a href="index.html">Hlavní stránka</a></li>
+            <li><a href="html/1_uvod_iot.html">Úvod</a></li>
+            <li><a href="html/2_historie_iot.html">Historie</a></li>
+            <li><a href="html/3_techologie_iot.html">Technologie</a></li>
+            <li><a href="html/4_aplikace_iot.html">Aplikace</a></li>
+            <li><a href="html/5_bezepecnost_iot.html">Bezpečnost</a></li>
         </ul>
-        vyhledávání: <input type="text" id="searchInput" placeholder="Hledat..."> <button type="button" id="searchButton">Hledat</button>
+        <input type="text" id="searchInput" placeholder="Hledat..."> <button type="button" id="searchButton">Hledat</button>
     </navbar>
 
     <div id="searchResults"></div>
     <main>
         <article id="welcome" class="welcome">
             <h1>
-                Výtejte na hlavní stránce Encyklopedie Internet of Things. Zde naleznete odkazy na jednotlivé kapitoly, které se věnují různým aspektům IoT, včetně historie, technologií, aplikací a bezpečnosti.
-                 Pro více informací klikněte na odkazy níže.
+                Výtejte na hlavní stránce Encyklopedie<br>
+                Internet of Things.
             </h1>
+            <p>
+                Zde naleznete odkazy na jednotlivé kapitoly, které se věnují různým aspektům IoT, včetně historie, technologií, aplikací a bezpečnosti.
+                 Pro více informací klikněte na odkazy níže.
+            </p>
         </article>
         <article>
             <h2>Obsah</h2>
@@ -38,5 +42,10 @@
             </ul>
         </article>
     </main>
+    <footer>
+        <p>
+            Tento text je částečně založen na informacích z <a href="https://cs.wikipedia.org/wiki/Internet_v%C4%9Bc%C3%AD#" target="_blank" rel="noopener">Wikipedie</a>.
+        </p>
+    </footer>
 </body>
 </html>
