@@ -73,6 +73,12 @@ navbar a:hover {
     background: rgba(255, 255, 255, 0.14);
 }
 
+navbar brand.active a {
+    background: rgba(255, 255, 255, 0.22);
+    color: #ffffff;
+    font-weight: 600;
+}
+
 navbar a.active,
 navbar li.active a {
     background: rgba(255, 255, 255, 0.22);
@@ -107,6 +113,39 @@ navbar input::placeholder {
 
 navbar button {
     cursor: pointer;
+}
+
+.hero {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    margin-bottom: 2rem;
+}
+
+.hero h1 {
+    flex: 1;
+    min-width: 240px;
+    margin: 0;
+}
+
+.hero figure {
+    margin: 0;
+    max-width: 380px;
+    width: 100%;
+}
+
+.hero figure img {
+    width: 100%;
+    height: auto;
+    border-radius: 1rem;
+    display: block;
+}
+
+.hero figcaption {
+    margin-top: 0.5rem;
+    font-size: 0.85rem;
+    color: #d7e1ff;
 }
 
 #searchResults {
