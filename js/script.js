@@ -1,9 +1,9 @@
 const searchPages = [
-    { url: 'html/1.html', title: 'Kapitola 1: Úvod do IoT' },
-    { url: 'html/2.html', title: 'Kapitola 2: Historie IoT' },
-    { url: 'html/3.html', title: 'Kapitola 3: Technologie IoT' },
-    { url: 'html/4.html', title: 'Kapitola 4: Aplikace IoT' },
-    { url: 'html/5.html', title: 'Kapitola 5: Bezpečnost v IoT' },
+    { url: 'html/1_uvod_iot.html', title: 'Kapitola 1: Úvod do IoT' },
+    { url: 'html/2_historie_iot.html', title: 'Kapitola 2: Historie IoT' },
+    { url: 'html/3_technologie_iot.html', title: 'Kapitola 3: Technologie IoT' },
+    { url: 'html/4_aplikace_iot.html', title: 'Kapitola 4: Aplikace IoT' },
+    { url: 'html/5_bezpecnost_v_iot.html', title: 'Kapitola 5: Bezpečnost v IoT' },
 ];
 
 const pageCache = new Map();
