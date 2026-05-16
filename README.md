@@ -1,3 +1,4 @@
 # Encyklopedie-IT1A
 school project for 1st grade
 HTML + CSS + JS
+Gitignor only for example, can be deleted.
