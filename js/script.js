@@ -55,6 +55,7 @@ async function searchFunction() {
     const query = document.getElementById('searchInput').value.trim();
     const resultsDiv = document.getElementById('searchResults');
     resultsDiv.innerHTML = '';
+    resultsDiv.style.display = 'none';
 
     if (!query) {
         return;
@@ -78,6 +79,7 @@ async function searchFunction() {
 
     if (results.length === 0) {
         resultsDiv.innerHTML = '<p>Nebyly nalezeny žádné výsledky pro zadaný dotaz.</p>';
+        resultsDiv.style.display = 'block';
         return;
     }
 
@@ -88,6 +90,7 @@ async function searchFunction() {
         list.appendChild(li);
     }
     resultsDiv.appendChild(list);
+    resultsDiv.style.display = 'block';
 }
 
 window.addEventListener('DOMContentLoaded', () => {
@@ -95,6 +98,61 @@ window.addEventListener('DOMContentLoaded', () => {
     document.getElementById('searchInput').addEventListener('keyup', event => {
         if (event.key === 'Enter') {
             searchFunction();
+        }
+    });
+});
+
+// Insert burger button into navbar and handle toggle for mobile
+document.addEventListener('DOMContentLoaded', () => {
+    const nav = document.querySelector('navbar');
+    if (!nav) return;
+
+    // move searchResults into search-bar (if present) to behave like a dropdown
+    const searchBar = nav.querySelector('.search-bar');
+    const resultsDiv = document.getElementById('searchResults');
+    if (searchBar && resultsDiv) {
+        searchBar.appendChild(resultsDiv);
+        resultsDiv.classList.add('dropdown');
+        resultsDiv.style.display = 'none';
+    }
+
+    // create burger button
+    const burger = document.createElement('button');
+    burger.className = 'burger';
+    burger.setAttribute('aria-label', 'Toggle menu');
+    burger.innerHTML = '<span class="burger-box"><span class="burger-inner"></span></span>';
+
+    // insert as first child of navbar
+    nav.insertBefore(burger, nav.firstChild);
+
+    burger.addEventListener('click', () => {
+        nav.classList.toggle('open');
+    });
+
+    // Close menu when clicking outside on small screens
+    document.addEventListener('click', (e) => {
+        if (!nav.classList.contains('open')) return;
+        if (!nav.contains(e.target)) {
+            nav.classList.remove('open');
+        }
+    });
+
+    // Close search dropdown when clicking outside
+    document.addEventListener('click', (e) => {
+        const searchBar = nav.querySelector('.search-bar');
+        const resultsDiv = document.getElementById('searchResults');
+        if (!searchBar || !resultsDiv) return;
+        if (!searchBar.contains(e.target)) {
+            resultsDiv.style.display = 'none';
+        }
+    });
+
+    // Hide dropdown on ESC
+    document.addEventListener('keyup', (e) => {
+        if (e.key === 'Escape') {
+            const resultsDiv = document.getElementById('searchResults');
+            if (resultsDiv) resultsDiv.style.display = 'none';
+            nav.classList.remove('open');
         }
     });
 });

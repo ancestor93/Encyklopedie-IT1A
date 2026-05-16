@@ -13,6 +13,10 @@ body {
     color: #1b1f34;
 }
 
+:root {
+    --nav-offset: 6rem;
+}
+
 navbar {
     position: fixed;
     top: 0;
@@ -22,7 +26,7 @@ navbar {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     gap: 1rem;
     padding: 1rem 1.25rem;
     background: #1b264f;
@@ -49,7 +53,7 @@ navbar brand img {
 
 navbar ul {
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     justify-content: center;
     gap: 0.75rem;
     margin: 0 auto;
@@ -103,6 +107,16 @@ navbar button {
     gap: 0.5rem;
 }
 
+/* Make search-bar the positioning context for dropdown results */
+.search-bar {
+    position: relative;
+}
+
+/* Burger hidden by default; shown only on small screens */
+.burger {
+    display: none;
+}
+
 navbar input {
     min-width: 180px;
 }
@@ -149,11 +163,59 @@ navbar button {
 }
 
 #searchResults {
-    padding-top: 5.5rem;
+    /* default fallback when placed outside search-bar */
+    margin: calc(var(--nav-offset)) auto 0;
     padding-left: 1.25rem;
     padding-right: 1.25rem;
     max-width: 1100px;
-    margin: 0 auto;
+    position: relative;
+    z-index: 900; /* below navbar (1000) so navbar stays on top */
+}
+
+/* Dropdown style when search results are attached to the search bar */
+#searchResults.dropdown {
+    position: absolute;
+    top: calc(100% + 0.4rem);
+    left: 0;
+    right: 0;
+    width: auto;
+    max-width: 480px;
+    margin: 0;
+    z-index: 1200; /* above navbar contents */
+}
+
+#searchResults.dropdown ul {
+    box-shadow: 0 8px 30px rgba(27,38,79,0.12);
+    padding: 0.5rem 0.75rem;
+}
+
+#searchResults.dropdown p { margin: 0.5rem 0; }
+
+/* Ensure each result is on its own line */
+#searchResults.dropdown ul {
+    display: block;
+    list-style: none;
+    margin: 0;
+}
+
+#searchResults.dropdown li {
+    display: block;
+    width: 100%;
+    margin: 0.4rem 0;
+}
+
+#searchResults.dropdown a {
+    display: block;
+    width: 100%;
+    padding: 0.45rem 0.6rem;
+    color: #1b264f;
+    text-decoration: none;
+    border-radius: 0.4rem;
+}
+
+#searchResults.dropdown a:hover {
+    background: rgba(27,38,79,0.06);
+    text-decoration: underline;
 }
 
 #searchResults ul {
@@ -237,41 +299,19 @@ footer a:hover {
         padding: 0.9rem 1rem;
     }
 
-    navbar ul {
-        gap: 0.5rem;
-    }
-}
-
-@media (max-width: 760px) {
-    navbar {
-        align-items: flex-start;
-        flex-wrap: wrap;
-    }
-
-    navbar::before {
-        content: "☰ Menu";
-        width: 100%;
-        display: block;
-        cursor: pointer;
-        font-weight: 700;
-        padding: 0.6rem 0;
-        text-align: center;
-        letter-spacing: 0.04em;
+    /* show burger earlier and hide full menu to avoid wrapping */
+    .burger {
+        display: inline-flex;
     }
 
     navbar ul,
-    navbar input,
-    navbar button {
+    navbar .search-bar {
         display: none;
     }
 
-    navbar:hover ul,
-    navbar:hover input,
-    navbar:hover button {
+    navbar.open ul,
+    navbar.open .search-bar {
         display: flex;
-    }
-
-    navbar:hover ul {
         flex-direction: column;
         align-items: center;
         width: 100%;
@@ -281,10 +321,112 @@ footer a:hover {
         border-radius: 0.7rem;
     }
 
-    navbar:hover input,
-    navbar:hover button {
+    navbar ul {
+        gap: 0.5rem;
+    }
+}
+
+/* Force burger menu between 761px and 900px to avoid layout issues */
+@media (min-width: 761px) and (max-width: 900px) {
+    navbar {
+        padding: 0.9rem 1rem;
+    }
+
+    .burger {
+        display: inline-flex;
+    }
+
+    /* hide full menu and search bar to force burger behavior */
+    navbar ul,
+    navbar .search-bar {
+        display: none;
+    }
+
+    navbar.open ul,
+    navbar.open .search-bar {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        margin-top: 0.75rem;
+        background: rgba(27, 38, 79, 0.95);
+        padding: 0.75rem 0;
+        border-radius: 0.7rem;
+    }
+}
+
+@media (max-width: 760px) {
+    navbar {
+        align-items: flex-start;
+        flex-wrap: wrap;
+    }
+
+    /* Hide nav items by default on small screens; show burger */
+    .burger {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        background: transparent;
+        border: none;
+        color: #ffffff;
+        cursor: pointer;
+        padding: 0.4rem;
+        margin: 0.2rem 0.5rem 0 0;
+    }
+
+    .burger-box {
+        display: inline-block;
+        width: 22px;
+        height: 16px;
+        position: relative;
+    }
+
+    .burger-inner,
+    .burger-inner::before,
+    .burger-inner::after {
+        width: 22px;
+        height: 2px;
+        background-color: #fff;
+        position: absolute;
+        left: 0;
+        transition: transform 0.2s ease, opacity 0.2s ease;
+    }
+
+    .burger-inner { top: 7px; }
+    .burger-inner::before { content: ''; top: -6px; }
+    .burger-inner::after { content: ''; top: 6px; }
+
+    navbar ul,
+    navbar .search-bar {
+        display: none;
+        width: 100%;
+    }
+
+    navbar.open ul,
+    navbar.open .search-bar {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background: rgba(27, 38, 79, 0.95);
+        width: 100%;
+        margin-top: 0.75rem;
+        padding: 0.75rem 0;
+        border-radius: 0.7rem;
+    }
+
+    navbar.open .search-bar {
+        gap: 0.5rem;
+    }
+
+    navbar.open .search-bar input,
+    navbar.open .search-bar button {
         width: calc(100% - 2rem);
         margin: 0.5rem 1rem 0;
+    }
+
+    /* When menu is opened on mobile, push search results further down */
+    navbar.open + #searchResults {
+        margin-top: calc(var(--nav-offset) + 220px);
     }
 
     navbar a {
@@ -306,4 +448,17 @@ footer a:hover {
     navbar button {
         font-size: 0.95rem;
     }
+}
+
+/* Responsive adjustments for navbar offset so search results are always visible */
+@media (max-width: 900px) {
+    :root { --nav-offset: 6.5rem; }
+}
+
+@media (max-width: 760px) {
+    :root { --nav-offset: 9rem; }
+}
+
+@media (max-width: 500px) {
+    :root { --nav-offset: 7.5rem; }
 }
